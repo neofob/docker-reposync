@@ -1,0 +1,11 @@
+FROM rockylinux:9.3
+
+RUN dnf install -y rsync createrepo yum-utils
+RUN yum install -y epel-release
+RUN mkdir -p /repo/conf/ && \
+    mkdir -p /repo/repo/ && \
+    mkdir -p /repo/cachedir/
+
+COPY docker-entrypoint.sh /
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
